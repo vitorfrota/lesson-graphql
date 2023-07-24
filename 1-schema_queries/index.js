@@ -27,6 +27,11 @@ async function init() {
 `
 
 const resolvers = {
+  User: {
+    name(parent) {
+      return parent.full_name
+    }
+  },
   Query: {
     books() {
       return [
@@ -43,7 +48,7 @@ const resolvers = {
       return {
         age: 25,
         isAdmin: true,
-        name: 'Vitor Frota'
+        full_name: 'Vitor Frota'
       }
     }
   }
