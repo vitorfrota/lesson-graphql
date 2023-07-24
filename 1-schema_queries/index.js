@@ -10,6 +10,7 @@ async function init() {
 
     type Query {
       books: [Book]
+      now: String
     }
 `
 
@@ -22,6 +23,9 @@ const resolvers = {
           title: 'Primeiro teste'
         }
     ]
+    },
+    now() {
+      return String(new Date())
     }
   }
 }
