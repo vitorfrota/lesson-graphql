@@ -10,9 +10,19 @@ async function init() {
       author: String
     }
 
+    type User {
+      id: ID!
+      name: String!
+      email: String!
+      age: Int
+      salary: Float
+      isAdmin: Boolean
+    }
+
     type Query {
       books: [Book]
       now: Date
+      loggedUser: User
     }
 `
 
@@ -28,6 +38,13 @@ const resolvers = {
     },
     now() {
       return new Date()
+    },
+    loggedUser() {
+      return {
+        age: 25,
+        isAdmin: true,
+        name: 'Vitor Frota'
+      }
     }
   }
 }
