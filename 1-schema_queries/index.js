@@ -3,6 +3,8 @@ const { startStandaloneServer } = require('@apollo/server/standalone')
 
 async function init() {
   const typeDefs = `
+    scalar Date
+
     type Book {
       title: String
       author: String
@@ -10,7 +12,7 @@ async function init() {
 
     type Query {
       books: [Book]
-      now: String
+      now: Date
     }
 `
 
@@ -25,7 +27,7 @@ const resolvers = {
     ]
     },
     now() {
-      return String(new Date())
+      return new Date()
     }
   }
 }
