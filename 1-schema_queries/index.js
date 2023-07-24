@@ -10,6 +10,13 @@ async function init() {
       author: String
     }
 
+    type Product {
+      discountPrice: Float
+      name: String!
+      price: Float!
+      discount: Float
+    }
+
     type User {
       id: ID!
       name: String!
@@ -23,10 +30,16 @@ async function init() {
       books: [Book]
       now: Date
       loggedUser: User
+      featuredProduct: Product
     }
 `
 
 const resolvers = {
+  Product: {
+    discountPrice(parent) {
+      return parent.price - parent.discount
+    }
+  },
   User: {
     name(parent) {
       return parent.full_name
@@ -49,6 +62,13 @@ const resolvers = {
         age: 25,
         isAdmin: true,
         full_name: 'Vitor Frota'
+      }
+    },
+    featuredProduct() {
+      return {
+        name: 'Iphone 15 256gb gold edition',
+        price: 15000,
+        discount: 5000
       }
     }
   }
