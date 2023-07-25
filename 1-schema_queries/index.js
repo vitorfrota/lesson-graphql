@@ -6,13 +6,15 @@ const usersMock = [
     id: 'id-1',
     name: 'John Doe',
     email: 'john@doe.com',
-    age: 20
+    age: 20,
+    profile_id: 'id-1'
   },
   {
     id: 'id-2',
     name: 'Anne Doe',
     email: 'anne2023@doe.com',
-    age: 31
+    age: 31,
+    profile_id: 'id-2'
   },
 ]
 
@@ -48,6 +50,7 @@ async function init() {
       name: String!
       email: String!
       age: Int
+      profile: Profile
     }
 
     type Profile {
@@ -72,6 +75,13 @@ const resolvers = {
   Product: {
     discountPrice(parent) {
       return parent.price - parent.discount
+    }
+  },
+  User: {
+    profile(parent) {
+      const profilesEncountered = profilesMock.filter(profile=> profile.id === parent.profile_id)
+
+      return profilesEncountered[0] ?? null
     }
   },
   Query: {
