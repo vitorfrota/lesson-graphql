@@ -1,6 +1,21 @@
 const { ApolloServer } = require("@apollo/server")
 const { startStandaloneServer } = require('@apollo/server/standalone')
 
+const usersMock = [
+  {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@doe.com',
+    age: 20
+  },
+  {
+    id: 2,
+    name: 'Anne Doe',
+    email: 'anne2023@doe.com',
+    age: 31
+  },
+]
+
 async function init() {
   const typeDefs = `
     scalar Date
@@ -22,8 +37,6 @@ async function init() {
       name: String!
       email: String!
       age: Int
-      salary: Float
-      isAdmin: Boolean
     }
 
     type Query {
@@ -32,6 +45,7 @@ async function init() {
       loggedUser: User
       featuredProduct: Product
       numbers: [Int!]!
+      users: [User]
     }
 `
 
@@ -39,11 +53,6 @@ const resolvers = {
   Product: {
     discountPrice(parent) {
       return parent.price - parent.discount
-    }
-  },
-  User: {
-    name(parent) {
-      return parent.full_name
     }
   },
   Query: {
@@ -61,8 +70,7 @@ const resolvers = {
     loggedUser() {
       return {
         age: 25,
-        isAdmin: true,
-        full_name: 'Vitor Frota'
+        name: 'Vitor Frota'
       }
     },
     featuredProduct() {
@@ -76,6 +84,9 @@ const resolvers = {
       const ascNumbers = (a,b) => a - b
 
       return Array(6).fill(0).map(()=> parseInt(Math.random() * 60 + 1)).sort(ascNumbers)
+    },
+    users() {
+      return usersMock
     }
   }
 }
