@@ -3,16 +3,27 @@ const { startStandaloneServer } = require('@apollo/server/standalone')
 
 const usersMock = [
   {
-    id: 1,
+    id: 'id-1',
     name: 'John Doe',
     email: 'john@doe.com',
     age: 20
   },
   {
-    id: 2,
+    id: 'id-2',
     name: 'Anne Doe',
     email: 'anne2023@doe.com',
     age: 31
+  },
+]
+
+const profilesMock = [
+  {
+    id: 'id-1',
+    name: 'Comum'
+  },
+  {
+    id: 'id-2',
+    name: 'Administrador'
   },
 ]
 
@@ -39,6 +50,11 @@ async function init() {
       age: Int
     }
 
+    type Profile {
+      id: ID!
+      name: String!
+    }
+
     type Query {
       books: [Book]
       now: Date
@@ -46,6 +62,9 @@ async function init() {
       featuredProduct: Product
       numbers: [Int!]!
       users: [User]
+      user(id: ID): User
+      profiles: [Profile]
+      profile(id: ID): Profile
     }
 `
 
@@ -87,6 +106,19 @@ const resolvers = {
     },
     users() {
       return usersMock
+    },
+    user(_, args) {
+      const usersEncountered = usersMock.filter(user=> user.id == args.id)
+
+      return usersEncountered[0] ?? null
+    },
+    profiles() {
+      return profilesMock
+    },
+    profile(_, args) {
+      const profilesEncountered = profilesMock.filter(profile=> profile.id === args.id)
+
+      return profilesEncountered[0] ?? null
     }
   }
 }
