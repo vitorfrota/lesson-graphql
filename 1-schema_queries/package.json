@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon --ext js,graphql"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,8 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "@apollo/server": "^4.8.1",
-    "graphql": "^16.7.1"
+    "@graphql-tools/load-files": "^7.0.0",
+    "graphql": "^16.7.1",
+    "graphql-yoga": "^4.0.3"
   }
 }
