@@ -31,6 +31,7 @@ async function init() {
       now: Date
       loggedUser: User
       featuredProduct: Product
+      numbers: [Int!]!
     }
 `
 
@@ -70,6 +71,11 @@ const resolvers = {
         price: 15000,
         discount: 5000
       }
+    },
+    numbers() {
+      const ascNumbers = (a,b) => a - b
+
+      return Array(6).fill(0).map(()=> parseInt(Math.random() * 60 + 1)).sort(ascNumbers)
     }
   }
 }
