@@ -1,0 +1,19 @@
+enum Status {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  age: Int
+  profile: Profile
+  status: Status
+}
+
+type Profile {
+  id: ID!
+  name: String!
+}

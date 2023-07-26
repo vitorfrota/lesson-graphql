@@ -1,0 +1,8 @@
+#import Mutation from 'mutation.graphql'
+#import Query from 'query.graphql'
+#import User, Profile from 'user.graphql'
+    
+scalar Date
+
+
+
