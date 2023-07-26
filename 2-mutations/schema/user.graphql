@@ -17,3 +17,9 @@ type Profile {
   id: ID!
   name: String!
 }
+
+input UserInput {
+  age: Int
+  email: String
+  name: String
+}

@@ -1,8 +1,8 @@
 const { users, generateId } = require('../db')
 
 module.exports = {
-  createUser(_, args) {
-    const userEncountered = users.some(user=> user.email === args.email)
+  createUser(_, { data }) {
+    const userEncountered = users.some(user=> user.email === data.email)
 
     if(userEncountered) throw new Error('E-mail cadastrado')
 
@@ -10,7 +10,7 @@ module.exports = {
       id: generateId(),
       profile_id: 'id-1',
       status: 'ACTIVE',
-      ...args
+      ...data
     }
 
     users.push(newUser)
