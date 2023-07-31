@@ -9,4 +9,8 @@ type Mutation {
     email: String,
     age: Int
   ): User!
+
+  createProfile(data: ProfileInput!): Profile!
+  deleteProfile(id: Int): Profile
+  updateProfile(filter: ProfileFilter! data: ProfileInput!): Profile
 }
